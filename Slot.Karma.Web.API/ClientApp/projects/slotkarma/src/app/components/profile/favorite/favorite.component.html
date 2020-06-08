@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <h1 class="text-center">Your Favorites</h1>
+  <ng-container>
+    <div class="row text-center empty" *ngIf="favorites.length==0">
+      <div>Start adding your favorite slot machines</div>
+    </div>
+    <cdk-virtual-scroll-viewport itemSize="20" *ngIf="favorites.length>0">
+      <li *cdkVirtualFor="let item of favorites;" class="animated lightSpeedIn item-wrap">
+        <div class="container-fluid">
+          <div class="item row">
+            <div class="col" (click)="delete(item)">
+              <i class="float-left text-danger remove eye fa fa-times"></i>
+            </div>
+            <div class="col">
+              <div>{{item.slotMachine.number}}</div>
+            </div>
+            <div class="col" (click)="select(item)">
+              <i class="float-right icon-lg icon-eye"></i>
+            </div>
+          </div>
+          <div class="item row">
+            <div>{{item.slotMachine.name}}</div>
+          </div>
+          <div class="item row">
+            <div>{{item.slotMachine.casino.name}}</div>
+          </div>
+          <div class="item row">
+            <div>{{item.slotMachine.created}}</div>
+          </div>
+        </div>
+      </li>
+    </cdk-virtual-scroll-viewport>
+    <br>
+  </ng-container>
+</div>

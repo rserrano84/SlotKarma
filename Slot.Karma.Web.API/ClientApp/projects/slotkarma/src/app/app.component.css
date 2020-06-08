@@ -1,0 +1,13 @@
+.body {    
+  display: flex;
+  flex-direction: column;
+  height:100%;
+}
+.content {
+  flex:1;
+  overflow-y:auto !important;
+  height:100%;
+}
+.footer {
+  bottom:0px;
+}

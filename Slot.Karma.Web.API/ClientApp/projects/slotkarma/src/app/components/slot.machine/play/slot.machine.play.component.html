@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <h1 class="text-center">{{this.authorizationGuard.user.selectedMachine.number}}</h1>
+  <h1 class="text-center">{{this.authorizationGuard.user.selectedMachine.name}}</h1>
+  <!--[style.visibility]="state==control.Stop ? 'hidden' : 'visible'"-->
+  <!--[style.visibility]="elapsed ? 'visible' : 'hidden'">-->
+  <br />
+  <br />
+
+  <div class="text-center">
+    <h1 class="font-weight-bold"
+        [ngClass]="{'text-success': state==control.Play, 'text-warning': state==control.Pause, 'text-danger': state==control.Stop}">
+      <font size="5">{{state}}</font>
+</h1>
+  </div>
+  <div class="text-center font_size font-weight-bold">
+    <font size="5">{{elaspedMessage}}</font>
+  </div>
+  <div class="controls text-center">
+    <button *ngIf="state!=control.Play" type="submit" class="control-button btn btn-success" (click)="play()"><i class="fa fa-play"></i></button>
+    <!--<button type="button" class="control-button btn btn-secondary" (click)="pause()" [disabled]="state!=control.Play"><i class="fa fa-pause"></i></button>-->
+    <button *ngIf="state==control.Play" type="submit" class="control-button btn btn-danger" (click)="stop()"><i class="fa fa-stop"></i></button>
+  </div>
+</div>

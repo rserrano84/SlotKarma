@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <form class="form-group" #form="ngForm" method="post">
+      <h1 class="text-center"><i class="fa fa-check-circle accept-icon"></i></h1>
+      <h1 class="text-center">ACCEPT TERMS</h1>
+
+        <div class="form-group row">
+          <button type="submit" class="col btn btn-primary w-100" (click)="submit()">Accept</button>
+          <button type="button" class="col btn btn-secondary w-100" (click)="back()">Cancel</button>
+        </div>
+    </form>
+    <section class="links row">
+        View the Slot Karma &nbsp;<a tabindex="3" (click)="router.navigate(['terms'])">Terms and Conditions</a>&nbsp;
+        and the &nbsp;<a tabindex="4" (click)="router.navigate(['privacy'])">Privacy Policy</a>
+    </section>
+</div>

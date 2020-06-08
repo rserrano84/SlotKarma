@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <form class="form-group" #form="ngForm" method="post">
+    <h1 class="text-center">{{Util.greeting}} {{authorizationGuard.user.username}}</h1>
+    <h2 class="text-center">Where will you be playing today?</h2>
+    <div class="form-group row">
+      <p-autoComplete name="casinopick" #autocomplete [dropdown]="false" (completeMethod)="loadCasinos($event)"
+        [suggestions]="casinos" [(ngModel)]="record" class="w-100" styleClass="w-100"
+        placeholder="Search for any Casino" inputStyleClass="form-control w-100" (onSelect)="onSelectCasino($event)" (onFocus)="onFocus($event)"
+        id="sk-casino-casino-search" [ngModelOptions]="{standalone: false}" [forceSelection]="false" field="name" dataKey="id">
+        <ng-template let-casino pTemplate="item">
+          {{casino.name}}
+        </ng-template>
+      </p-autoComplete>
+    </div>
+    <!--<div class="form-group row">
+      OR
+    </div>
+    <div class="form-group row">
+      <p-dropdown [options]="nearbyCasinos" [(ngModel)]="record" optionLabel="name" class="form-control w-100" [ngModelOptions]="{standalone: true}"
+        placeholder="Pick a Nearby Casino"></p-dropdown>
+    </div>-->
+    <div class="form-group row" hidden>
+      <div class="input-group">
+        <input [ngModel]="latitude" name="latitude" type="text" class="form-control" id="sk-casino-latitude" readonly [ngModelOptions]="{standalone: true}">
+      </div>
+    </div>
+    <div class="form-group row" hidden>
+      <div class="input-group">
+        <input [ngModel]="longitude" name="longitude" type="text" class="form-control" id="sk-casino-longitude" [ngModelOptions]="{standalone: true}"
+          readonly>
+      </div>
+    </div>
+    <div class="form-group row">
+      <input [(ngModel)]="record.checkedIn" name="checkedin" type="checkbox" class="checkbox" id="sk-casino-checkedin" [ngModelOptions]="{standalone: true}"
+        [value]="record.checkedIn">
+      <span class="label">Don’t check me in. I’m not playing here, I am just looking up information on this
+        casino</span>
+    </div>
+    <div class="form-group row">
+      <button type="submit" class="btn btn-primary w-100" (click)="submit()" [disabled]="!record.id"
+        [hidden]="!record">This is it</button>
+    </div>
+  </form>
+  <div *ngIf="isSaving">
+    <h1 class="text-center">Great Choice!</h1>
+    <h1 class="text-center">Have an awesome time!</h1>
+  </div>
+</div>

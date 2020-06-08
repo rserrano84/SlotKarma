@@ -1,0 +1,33 @@
+<p-toast #growl life="50000" position="center">
+  <ng-template let-message pTemplate="message">
+    <div class="container">
+      <div style="text-align: left">
+        <i class="fa fa-exclamation" style="font-size: 1rem"></i>&nbsp;{{message.summary}}
+        <p>{{message.detail}}</p>
+      </div>
+      <div class="form-group row">
+        <button type="button" (click)="messageService.clear()" class="col btn btn-dark">OK</button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+
+<!--<div style="min-height: 100vh; width:100%">
+  <load-mask type="circle" [hidden]="!isLoading"></load-mask>
+  <div id="main" class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-bottom">
+    <navigation></navigation>
+  </nav>
+</div>-->
+
+<div class="body">
+  <load-mask type="circle" [hidden]="!isLoading"></load-mask>
+  <div class="container-fluid content">
+    <router-outlet></router-outlet>
+  </div>
+  <nav class="navbar navbar-expand-md navbar-light bg-light footer">
+    <navigation></navigation>
+  </nav>
+</div>

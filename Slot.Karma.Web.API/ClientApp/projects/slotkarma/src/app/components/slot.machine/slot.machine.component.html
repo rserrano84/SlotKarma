@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <h1 class="text-center">{{slotMachine.number}}</h1>
+  <h1 class="text-center">{{slotMachine.name}}</h1>
+  <ng-container>
+    <div class="row text-center empty" *ngIf="slotMachineEvents.length==0">
+      <div>Be the first to enter this machine’s karma!</div>
+    </div>
+    <cdk-virtual-scroll-viewport itemSize="20" *ngIf="slotMachineEvents.length>0">
+      <li *cdkVirtualFor="let item of slotMachineEvents;" class="animated lightSpeedIn item-wrap">
+        <div class="container-fluid">
+          <div class="item row">
+            <div class="col">
+              <div [ngClass]="{gain: item.net>=0, loss: item.net<0}">{{item.net | currency:'USD':true:'0.0-0'}}</div>
+              <div>{{item.typeName}}</div>
+              <div>{{item.end | moment:'MM/DD/YYYY'}}</div>
+              <div>{{item.end | moment:'hh:mm A'}}</div>
+              <div>{{item.elapsed}}</div>
+              
+            </div>
+            <div class="col" (click)="select(item)">
+              <i class="float-right icon-lg icon-eye"></i>
+            </div>
+          </div>
+        </div>
+      </li>
+    </cdk-virtual-scroll-viewport>
+
+    <br>
+    <div class="form-group row">
+      <button type="submit" class="btn btn-primary w-100 btn-large" (click)="play()">Play this Machine</button>
+    </div>
+    <div class="form-group row">
+      <button type="button" class="btn btn-secondary w-50" (click)="change()">Change Machine</button>
+      <button type="button" class="btn btn-secondary w-50" (click)="favorite()"><i class="fa fa-star icon-a fa-plus"></i><i class="fa fa-plus"></i></button>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <form class="form-group" #form="ngForm" method="post">
+    <h1 class="text-center font_text_greeting">{{Util.greeting}} {{authorizationGuard.user.username}}</h1>
+    <h2 style="display: inline" class="text-center">Enter slot machine number</h2>
+    <h2 *ngIf="authorizationGuard.user.casino"  style="display: inline" class="text-center">  at  {{authorizationGuard.user.casino.name}} </h2>
+    <div class="form-group row">
+      <div class="input-group">
+        <p-autoComplete name="slotpick" #autocomplete [dropdown]="false" (completeMethod)="loadSlotMachines($event)"
+          [suggestions]="slotMachines" [(ngModel)]="record" class="font_text w-100" styleClass="w-100"
+          placeholder="Enter Slot Machine Number" inputStyleClass="form-control w-100" (onSelect)="onSelectSlotMachine($event)" (onFocus)="onFocus($event)"
+          id="sk-slot-slot-search" [ngModelOptions]="{standalone: false}" [forceSelection]="false" field="number" dataKey="id">
+          <ng-template let-slot pTemplate="item">
+            <span unsafeHtml="{{slot.number | style:keyword:'font-weight:bolder'}}&nbsp;"></span>{{slot.name}} 
+          </ng-template>
+        </p-autoComplete>
+        <div class="input-group-append"></div>
+      </div>
+      <small class="form-text text-muted">Do not enter hyphens or letters</small>
+      <div *ngIf="form.controls.id && form.controls.id.dirty && form.controls.id.invalid && form.controls.id.dirty"
+        class="alert alert-danger w-100">
+        <div *ngIf="form.controls.id.errors && form.controls.id.errors.required">
+          You must enter a slot machine number containing 5 or 6 characters
+        </div>
+        <div *ngIf="form.controls.id.errors && form.controls.id.errors.pattern">
+          A Slot machine number must be 5 or 6 characters
+        </div>
+      </div>
+    </div>
+    <div *ngIf="slotMachine.id"class="form-group row">
+      <button type="submit" class="btn_size btn-primary w-100" (click)="submit()">Let's Go ({{slotMachine.name}})</button>
+    </div>
+  </form>
+
+  <form class="form-group" #addForm="ngForm" method="post">
+    <h2 class="text-center">Cannot find the slot machine?  Add one</h2>
+    <div class="form-group row">
+      <input [(ngModel)]="newMachine.number" name="number" type="number" class="form-control font_input" id="sk-home-slot-number" required inputFilter="[0-9]" pattern="\d{5,6}"placeholder="Slot Machine Number" minLength="5" maxlength="6">
+      <div
+        *ngIf="addForm.controls && addForm.controls.username && addForm.controls.number.invalid && addForm.controls.number.dirty"
+        class="alert alert-danger w-100">
+        <div *ngIf="addForm.controls.number.errors && addForm.controls.number.errors.required">
+          Slot Machine Number is Required
+        </div>
+      </div>
+      <small class="form-text text-muted"></small>
+    </div>
+    
+    <div class="form-group row">
+      <input [(ngModel)]="newMachine.name" name="name" type="text" class="form-control" id="sk-home-slot-name" placeholder="Slot Machine Name" maxlength="128">
+    </div>
+    <div class="form-group row">
+      <button type="submit" class="btn btn-primary w-100" (click)="save()" [disabled]="addForm.invalid">Add</button>
+    </div>
+  
+  </form>
+
+</div>

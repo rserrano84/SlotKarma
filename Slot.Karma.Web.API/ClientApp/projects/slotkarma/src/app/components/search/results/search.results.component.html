@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <h1 class="text-center">{{header}} @ </h1>
+  <h2 class="text-center">{{authorizationGuard.user.casino.name}}</h2>
+    <cdk-virtual-scroll-viewport itemSize="20" *ngIf="searchResults.length>0">
+      <li *cdkVirtualFor="let item of searchResults;" class="animated lightSpeedIn item-wrap">
+        <div class="container-fluid">
+          <div class="item row">
+            <div class="col" *ngIf="item.net!=null">
+              <div [ngClass]="{gain: item.net>=0, loss: item.net<0}">{{item.net | currency:'USD':true:'0.0-0'}}</div>
+              <div *ngIf="item.type!=null">{{item.eventType}}</div>
+            </div>
+            <div class="col" *ngIf="item.elapsed!=null">
+              <div class="font-weight-bold">{{item.time}}</div>
+            </div>
+            <div class="col" *ngIf="item.playCount!=null">
+              <div class="font-weight-bold">{{item.playCount}}</div>
+            </div>
+          </div>
+          <div class="item row">
+            <div class="col">
+              <div>{{item.machineName}}</div>
+              <div>{{item.machineNumber}}</div>
+              <div *ngIf="item.start">{{item.start | moment:'MM/DD/YYYY'}}</div>
+            </div>
+            <div class="col-2" (click)="select(item)">
+              <i class="float-right icon-lg icon-eye"></i>
+            </div>
+          </div>
+        </div>
+      </li>
+    </cdk-virtual-scroll-viewport>
+</div>

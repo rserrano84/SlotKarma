@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="row">
+    <img class="logo" src="./assets/images/logo-slot-karma.svg">
+  </div>
+  <form class="form-group" #form="ngForm" method="post">
+    <h1 class="text-center font-weight-bold">Login</h1>
+    <h2 class="text-center">Make some Karma happen!</h2>
+    <div class="form-group row">
+      <input [(ngModel)]="user.email" required name="username" type="text" class="form-control input-font_size" id="sk-login-username" required placeholder="Email or Username" maxlength="75">
+      <small class="form-text text-muted"></small>
+    </div>
+    <div class="form-group row">
+      <div class="input-group">
+        <input [(ngModel)]="user.password" required name="password" type="password" #usernameInput class="form-control input-font_size" id="sk-login-password" required placeholder="Password" maxlength="75">
+        <div class="input-group-append show-password">
+          <button class="btn btn-secondary" type="button" (click)="showPassword()"><i class="icon-sm icon-eye"></i></button>
+        </div>
+      </div>
+      <small class="form-text text-muted"></small>
+    </div>
+
+    <div class="form-group row text-center">
+      <button type="submit" class="btn btn-primary w-75 btn-large" [disabled]="form.invalid" (click)="submit()">Login</button>
+    </div>
+    <div class="form-group row">
+      <button type="button" class="btn btn-secondary w-75" (click)="signup()">New User? Sign up</button>
+    </div>
+    <div class="form-group row">
+      <button type="button" class="btn btn-secondary w-75" (click)="forgot()">Forgot Password</button>
+    </div>
+
+  </form>
+</div>

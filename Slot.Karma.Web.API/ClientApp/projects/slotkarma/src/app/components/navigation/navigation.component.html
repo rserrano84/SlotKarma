@@ -1,0 +1,10 @@
+<p-menubar [model]="items">
+  <div class="row" *ngIf="authorizationGuard.user && authorizationGuard.user.id && authorizationGuard.user.accepted && !router.url.includes('play') && !router.url.includes('record')">
+    <button *ngIf="authorizationGuard.user.id!=null && authorizationGuard.user.casino && authorizationGuard.user.selectedMachine && authorizationGuard.user.selectedMachine.id" class="col btn btn-light btn-menu-item" (click)="edit()"><i class="icon icon-edit"></i></button>
+    <button *ngIf="authorizationGuard.user.id!=null && authorizationGuard.user.casino && authorizationGuard.user.casino.id" class="col btn btn-light btn-menu-item" (click)="slot()"><i class="icon icon-slot-machine"></i></button>
+    <button *ngIf="authorizationGuard.user.id!=null" class="col btn btn-light btn-menu-item" (click)="casino()"><i class="icon icon-casino"></i></button>
+    <button *ngIf="authorizationGuard.user.id!=null && authorizationGuard.user.casino && authorizationGuard.user.casino.id" class="col btn btn-light btn-menu-item" (click)="search()"><i class="icon icon-search"></i></button>
+    <button *ngIf="authorizationGuard.user.id!=null" class="col btn btn-light btn-menu-item" (click)="profile()"><i class="icon icon-profile"></i></button>
+    <button *ngIf="authorizationGuard.user.id!=null && authorizationGuard.user.casino && authorizationGuard.user.casino.id" class="col btn btn-light btn-menu-item" (click)="offers()"><i class="icon icon-offer"></i></button>
+  </div>
+</p-menubar>

@@ -1,0 +1,109 @@
+<div class="container-fluid">
+  <form class="form-group" #form="ngForm" method="post">
+    <h1 class="text-center">Sign up with Slot Karma</h1>
+    <div class="form-group row">
+      <input [(ngModel)]="user.email" name="email" type="email" class="form-control" id="sk-signup-username"
+        required email placeholder="Email Address" maxlength="75">
+      <div
+        *ngIf="form.controls && form.controls.email && form.controls.email.invalid && form.controls.email.dirty"
+        class="alert alert-danger w-100">
+        <div *ngIf="form.controls.email.errors && form.controls.email.errors.required">
+          Email is Required
+        </div>
+        <div *ngIf="form.controls.email.errors && form.controls.email.errors.email">
+          Not a valid Email address
+        </div>
+      </div>
+      <small class="form-text text-muted"></small>
+    </div>
+
+    <div class="form-group row">
+      <input [(ngModel)]="user.username" name="username" type="text" class="form-control" id="sk-signup-username"
+        required placeholder="Username" maxlength="75">
+      <div
+        *ngIf="form.controls && form.controls.username && form.controls.username.invalid && form.controls.username.dirty"
+        class="alert alert-danger w-100">
+        <div *ngIf="form.controls.username.errors && form.controls.username.errors.required">
+          Username is Required
+        </div>
+      </div>
+      <small class="form-text text-muted"></small>
+    </div>
+
+    <div class="form-group row">
+      <div class="input-group">
+        <input [(ngModel)]="user.password" name="password" type="password" #usernameInput class="form-control"
+          pattern="(.){6,}" id="sk-signup-password" required placeholder="Password" maxlength="75">
+      </div>
+      <small class="form-text text-muted"></small>
+      <div
+        *ngIf="form.controls.password && form.controls.password.dirty && form.controls.password.invalid && form.controls.password.dirty"
+        class="alert alert-danger w-100">
+        <div *ngIf="form.controls.password.errors.required">
+          Password is required
+        </div>
+        <div *ngIf="form.controls.password.errors && form.controls.password.errors.pattern">
+          Must be at least 6 characters
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="input-group">
+        <input [(ngModel)]="user.confirm" name="confirm" type="password" #usernameInput class="form-control"
+          id="sk-signup-confirm" placeholder="Confirm Password" maxlength="75">
+      </div>
+      <small class="form-text text-muted"></small>
+      <div
+        [style.display]="form.controls.password && form.controls.confirm && form.controls.password.dirty && form.controls.confirm.dirty && user.password!==user.confirm ? 'block' : 'none'"
+        class="alert alert-danger w-100">
+        Passwords do not match
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <select [(ngModel)]="user.gender" name="gender" class="form-control">
+        <option *ngFor="let gender of Types.genders" [ngValue]="gender.id">{{gender.name}}</option>
+      </select>
+      <small class="form-text text-muted"></small>
+    </div>
+
+    <div class="form-group row">
+      <div class="input-group">
+        <input [(ngModel)]="user.zip" name="zip" type="text" class="form-control" id="sk-home-slot-id" required
+        inputFilter="[0-9]" pattern="\d{5}" placeholder="Zip Code" maxlength="5">
+        <div class="input-group-append"></div>
+      </div>
+      <small class="form-text text-muted"></small>
+      <div *ngIf="form.controls.zip && form.controls.zip.dirty && form.controls.zip.invalid && form.controls.zip.dirty"
+        class="alert alert-danger w-100">
+        <div *ngIf="form.controls.zip.errors && form.controls.zip.errors.pattern">
+          Enter a valid 5 digit zip code
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="input-group">
+        <input [(ngModel)]="dob" [matDatepicker]="datePicker" (click)="datePicker.open()" [value]="null" [formControl]="date" placeholder="Date of Birth" class="form-control" [readonly]="true" required (dateChange)="onDateChange($event)">
+        <div class="input-group-append">
+            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #datePicker></mat-datepicker>
+          </div>
+        </div>
+      <small class="form-text text-muted"></small>
+    </div>
+
+    <div class="form-group row">
+      <input [(ngModel)]="user.canContact" name="contact" type="checkbox" class="checkbox" id="sk-profile-contact" [ngModelOptions]="{standalone: true}"
+        [value]="user.canContact">
+      <span class="label">Slot Karma may contact me via email</span>
+    </div>    
+
+    <div class="form-group row">
+      <button type="submit" class="btn btn-primary w-100" (click)="submit()" [disabled]="form.invalid">Sign up</button>
+    </div>
+    <div class="form-group row">
+      <button type="button" class="btn btn-secondary w-100" (click)="router.navigate(['login'])">have an account? Sign in</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <h1 class="text-center">Offers</h1>
+  <ng-container>
+    <div class="row text-center empty" *ngIf="offers.length==0">
+      <div>No offers available at this time.  Please try again later.</div>
+    </div>
+    <cdk-virtual-scroll-viewport itemSize="20" *ngIf="offers.length>0">
+      <li *cdkVirtualFor="let item of offers;" class="animated lightSpeedIn item-wrap">
+        <div class="container-fluid">
+          <div class="item row">
+            <div class="col-2">
+            </div>
+            <div class="col-10">
+                <div class="font-weight-bold">{{item.name}}</div>
+                <div [unsafeHtml]="item.description"></div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </cdk-virtual-scroll-viewport>
+  </ng-container>
+</div>

@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <!--<h1 class="text-center">{{user.firstName}} {{user.lastName}}</h1>-->
+  <h1 class="text-center">{{user.username}}</h1>
+  <div class="form-group row">
+    <h2>{{user.email}}</h2>
+  </div>  
+  <!--<div class="form-group row">
+    <h2>{{Types.genderMap.get(user.gender)}}</h2>
+  </div>-->  
+
+  <!--<div class="form-group row">
+    <button type="submit" class="btn btn-success w-100" (click)="view()">VIEW MY KARMA CONTRIBUTIONS</button>
+  </div>-->
+    <div class="form-group row">
+      <button type="button" class="btn btn-primary w-100" (click)="changePassword()">Change Password</button>
+    </div>
+    <div class="form-group row">
+      <button type="button" class="btn btn-primary w-100" (click)="edit()">Edit Profile</button>
+    </div>
+    <div class="form-group row">
+      <button type="button" class="btn btn-primary w-100" (click)="favorites()"><i class="fa fa-star"></i>Favorites</button>
+    </div>
+    <div class="form-group row">
+      <button type="button" class="btn btn-primary w-100" (click)="history()">VIEW MY KARMA CONTRIBUTIONS</button>
+    </div>
+    <div class="form-group row">
+      <button type="button" class="btn btn-secondary w-100" (click)="logout()">Logout</button>
+    </div>
+</div>

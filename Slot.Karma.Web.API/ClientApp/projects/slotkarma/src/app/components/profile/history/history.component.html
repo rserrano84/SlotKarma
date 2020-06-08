@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <h1 class="text-center">Karma History</h1>
+    <cdk-virtual-scroll-viewport itemSize="20" *ngIf="slotMachineEvents.length>0">
+      <li *cdkVirtualFor="let item of slotMachineEvents;" class="animated lightSpeedIn item-wrap">
+        <div class="container-fluid">
+          <div class="item row">
+            <div class="col">
+              <div class="font-weight-bold">{{item.slotMachine.number}}</div>
+              <div class="">{{item.start | moment:'MM/DD/YYYY'}}</div>
+              <div class="">{{item.time}}</div>
+          </div>
+            <div class="col" *ngIf="item.net!=null">
+              <div [ngClass]="{gain: item.net>=0, loss: item.net<0}">{{item.net | currency:'USD':true:'0.0-0'}}</div>
+              <div *ngIf="item.type!=null">{{item.typeName}}</div>
+            </div>
+            <div class="col" (click)="select(item)">
+              <i class="float-right icon-lg icon-eye"></i>
+            </div>
+          </div>
+          <div class="item row">
+              <div>{{item.slotMachine.name}}</div>
+          </div>
+          <div class="item row">
+              <div>{{item.slotMachine.casino.name}}</div>
+          </div>
+        </div>
+      </li>
+    </cdk-virtual-scroll-viewport>
+</div>

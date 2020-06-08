@@ -1,0 +1,173 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "slotkarma": {
+      "projectType": "application",
+      "root": "projects/slotkarma",
+      "sourceRoot": "projects/slotkarma/src",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/slotkarma",
+            "index": "projects/slotkarma/src/index.html",
+            "main": "projects/slotkarma/src/main.ts",
+            "polyfills": "projects/slotkarma/src/polyfills.ts",
+            "tsConfig": "projects/slotkarma/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/slotkarma/src/favicon.ico",
+              "projects/slotkarma/src/assets",
+              "projects/slotkarma/src/manifest.webmanifest.json"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/slotkarma/src/styles.less"
+            ],
+            "scripts": [
+              "./node_modules/moment/min/moment.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/slotkarma/src/environments/environment.ts",
+                  "with": "projects/slotkarma/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/slotkarma/ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "slotkarma:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "slotkarma:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "slotkarma:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/slotkarma/src/test.ts",
+            "polyfills": "projects/slotkarma/src/polyfills.ts",
+            "tsConfig": "projects/slotkarma/tsconfig.spec.json",
+            "karmaConfig": "projects/slotkarma/karma.conf.js",
+            "assets": [
+              "projects/slotkarma/src/favicon.ico",
+              "projects/slotkarma/src/assets",
+              "projects/slotkarma/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/slotkarma/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/slotkarma/tsconfig.app.json",
+              "projects/slotkarma/tsconfig.spec.json",
+              "projects/slotkarma/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/slotkarma/e2e/protractor.conf.js",
+            "devServerTarget": "slotkarma:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "slotkarma:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "common-library": {
+      "projectType": "library",
+      "root": "projects/common-library",
+      "sourceRoot": "projects/common-library/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/common-library/tsconfig.lib.json",
+            "project": "projects/common-library/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/common-library/src/test.ts",
+            "tsConfig": "projects/common-library/tsconfig.spec.json",
+            "karmaConfig": "projects/common-library/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/common-library/tsconfig.lib.json",
+              "projects/common-library/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "slotkarma"
+}
