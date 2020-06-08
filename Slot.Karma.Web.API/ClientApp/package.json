@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "common-library": "ng build common-library --watch",
-    "slotkarma": "ng build --project slotkarma"
+    "slotkarma": "ng build --project slotkarma --prod && sw-precache --root=dist --config=precache-config.js"
   },
   "private": true,
   "dependencies": {
